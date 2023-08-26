@@ -2,6 +2,11 @@ import React, { useState } from 'react'
 import { AiFillEyeInvisible, AiFillEye } from 'react-icons/ai'
 import { Link } from 'react-router-dom';
 import OAuth from '../component/OAuth';
+import { getAuth, createUserWithEmailAndPassword, updateProfile } from 'firebase/auth'
+import { db } from "../firebase"
+import { doc, serverTimestamp, setDoc } from 'firebase/firestore';
+import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 const SingUp = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -10,15 +15,41 @@ const SingUp = () => {
     email: '',
     password: ''
   })
-
+  
   const { name, email, password} = formData;
-
+  const navigate = useNavigate();
+  
   const saveEntries = (e) =>{
     setFormData((prevState) => ({
       ...prevState,
       [e.target.id] : e.target.value
     }));
   }
+
+  const handleSubmit = async (e) =>{
+    e.preventDefault()
+
+    try {
+      const auth = getAuth()
+      const userCredential = await createUserWithEmailAndPassword(auth, email, password)
+
+      updateProfile(auth.currentUser, {
+        displayName: name
+      })
+      const user = userCredential.user
+       const formDatacopy = {...formData}
+       delete formDatacopy.password;
+       //get the date the user register
+       formDatacopy.timestamp = serverTimestamp()
+       // to save the date the user register in the database
+       await setDoc(doc(db, 'users', user.uid), formDatacopy)
+       toast.success('Registration was successful')
+       navigate('/')
+    } catch (error) {
+      toast.error('something went wrong with the registration')
+    }
+  }
+
   return (
     <section>
       <h1 className='text-3xl text-center mt-6 font-bold'>Sign Up</h1>
@@ -28,21 +59,21 @@ const SingUp = () => {
           className='w-full rounded-2xl' />
         </div>
         <div className='w-full md:w[50%] lg:w-[40%] lg:ml-20'>
-          <form>
+          <form onSubmit={handleSubmit}>
+          <input
+              className='w-full px-4 py-2 text-xl text-gray-700 bg-white border-gray-300 rounded transition ease-in-out mb-6' 
+              type="text"
+              placeholder='Full name'
+              id='name' 
+              value={name}
+              onChange={saveEntries}
+             />
             <input
               className='w-full px-4 py-2 text-xl text-gray-700 bg-white border-gray-300 rounded transition ease-in-out mb-6' 
               type="email"
               placeholder='Email address'
               id='email' 
               value={email}
-              onChange={saveEntries}
-               />
-            <input
-              className='w-full px-4 py-2 text-xl text-gray-700 bg-white border-gray-300 rounded transition ease-in-out mb-6' 
-              type="text"
-              placeholder='Full name'
-              id='name' 
-              value={name}
               onChange={saveEntries}
                />
             <div className='relative mb-6'>
