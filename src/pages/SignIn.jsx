@@ -1,7 +1,9 @@
 import React, { useState } from 'react'
 import { AiFillEyeInvisible, AiFillEye } from 'react-icons/ai'
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import OAuth from '../component/OAuth';
+import { signInWithEmailAndPassword, getAuth } from 'firebase/auth';
+import { toast } from 'react-toastify';
 
 const SingIn = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -9,7 +11,8 @@ const SingIn = () => {
     email: '',
     password: ''
   })
-
+  const auth = getAuth();
+  const navigate = useNavigate()
   const {email, password} = formData;
 
   const saveEntries = (e) =>{
@@ -17,6 +20,19 @@ const SingIn = () => {
       ...prevState,
       [e.target.id] : e.target.value
     }));
+  }
+
+  const handleSubmit = async (e) =>{
+    e.preventDefault()
+    try {
+      const userCredential = await signInWithEmailAndPassword(auth, email, password)
+      if(userCredential.user){
+        navigate('/')
+      }
+    } catch (error) {
+      toast.error("incorrect user credentials")
+      
+    }
   }
   return (
     <section>
@@ -27,7 +43,7 @@ const SingIn = () => {
           className='w-full rounded-2xl' />
         </div>
         <div className='w-full md:w[50%] lg:w-[40%] lg:ml-20'>
-          <form>
+          <form onSubmit={handleSubmit}>
             <input
               className='w-full px-4 py-2 text-xl text-gray-700 bg-white border-gray-300 rounded transition ease-in-out mb-6' 
               type="email"
