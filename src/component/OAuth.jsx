@@ -30,7 +30,6 @@ const OAuth = () => {
 
         } catch (error) {
          toast.error("could not authorize with Google")
-         console.log(error)
         }
     }
   return (
