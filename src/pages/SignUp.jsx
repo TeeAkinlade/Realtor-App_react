@@ -55,7 +55,7 @@ const SingUp = () => {
       <h1 className='text-3xl text-center mt-6 font-bold'>Sign Up</h1>
       <div className='flex justify-center flex-wrap items-center px-6 py-12 max-w-6xl mx-auto '>
         <div className='md:w-[67%] lg:w-[50%] mb-12 md:mb-6'>
-          <img src="/images/maria-ziegler-jJnZg7vBfMs-unsplash.jpg" alt="login image"
+          <img src="/src/images/maria-ziegler-jJnZg7vBfMs-unsplash.jpg" alt="login image"
           className='w-full rounded-2xl' />
         </div>
         <div className='w-full md:w[50%] lg:w-[40%] lg:ml-20'>
