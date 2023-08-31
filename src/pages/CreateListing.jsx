@@ -145,7 +145,9 @@ const CreateListing = () => {
           ...formData,
           imgUrls,
           enableGeoLocation,
-          timestamp: serverTimestamp()
+          timestamp: serverTimestamp(),
+          // use to check the id of the user
+          userRef: auth.currentUser.uid,
         }
         delete formDataCopy.images;
         !formDataCopy.offer && delete formDataCopy.discountedPrice;
