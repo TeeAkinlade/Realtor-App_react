@@ -2,8 +2,10 @@ import React from 'react'
 import Moment from 'react-moment'
 import { Link } from 'react-router-dom'
 import { MdLocationOn } from 'react-icons/md'
+import { MdEdit } from 'react-icons/md'
+import { FaTrash } from 'react-icons/fa'
 
-export default function ListingItem({ result, id }) {
+export default function ListingItem({ result, id, handlePostEdit, handlePostDelete }) {
   return (
     <li className='relative first-line:bg-white flex flex-col justify-between items-center shadow-md hover:shadow-xl rounded-md overflow-hidden transition-shadow duration-150 m-[10px]'>
       <Link to={`/category/${result.type}/${id}`} className='contents'>
@@ -25,9 +27,20 @@ export default function ListingItem({ result, id }) {
             <div className="flex items-center space-x-1">
               <p className="font-bold text-xs">{result.bathrooms > 1 ? `${result.bathrooms} Baths` : '1 Bath'}</p>
             </div>
+
           </div>
         </div>
       </Link>
+      {handlePostDelete && (
+        <FaTrash className="absolute bottom-2 right-2 h-[14px] cursor-pointer text-red-500"
+          onClick={() => handlePostDelete(result.id)}
+        />
+      )}
+      {handlePostEdit && (
+        <MdEdit className="absolute bottom-2 right-8 h-4 cursor-pointer"
+          onClick={() => handlePostEdit(result.id)}
+        />
+      )}
     </li >
   )
 }

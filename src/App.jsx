@@ -10,6 +10,7 @@ import CreateListing from "./pages/CreateListing"
 import { ToastContainer } from "react-toastify"
 import 'react-toastify/dist/ReactToastify.css';
 import PrivateRoute from "./component/PrivateRoute"
+import EditListing from "./pages/EditListing"
 
 function App() {
 
@@ -30,6 +31,9 @@ function App() {
           <Route path="/create-listing" element={<PrivateRoute />}>
             <Route path="/create-listing" element={<CreateListing />} />
           </Route>
+          <Route path="/edit-listing" element={<PrivateRoute />}>
+            <Route path="/edit-listing/:resultId" element={<EditListing />} />
+          </Route>
         </Routes>
       </Router>
       <ToastContainer
@@ -43,8 +47,8 @@ function App() {
         draggable
         pauseOnHover
         theme="dark"
-/>
-    </> 
+      />
+    </>
   )
 }
 
