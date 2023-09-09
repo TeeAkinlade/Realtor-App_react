@@ -284,6 +284,7 @@ const CreateListing = () => {
             <div className="">
               <p className='text-lg font-semibold'>Longitude</p>
               <input type="number"
+                step="any"
                 id="longitude"
                 value={longitude}
                 onChange={handleClick}
