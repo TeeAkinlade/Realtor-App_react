@@ -61,7 +61,7 @@ const Listing = () => {
                 <FaShare className='text-lg text-slate-500' />
             </div>
             {shareLinkCopied && (
-                <p className="fixed top-[23%] right-[6%] font-semibold boder-2 border-gray-400 rounded-md bg-white z-10 p-2 ">Linked copied</p>
+                <p className="fixed top-[23%] right-[5%] font-semibold boder-2 border-gray-400 rounded-md bg-white z-10 p-2 ">Linked copied</p>
             )}
         </main >
     )
