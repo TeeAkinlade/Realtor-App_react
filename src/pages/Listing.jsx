@@ -4,7 +4,6 @@ import { useParams } from 'react-router'
 import { db } from '../firebase';
 import Spinner from '../component/Spinner';
 import { Swiper, SwiperSlide } from 'swiper/react';
-// import SwiperCore, { Autoplay } from 'swiper'
 import { Navigation, Pagination, EffectFade, Autoplay } from 'swiper/modules';
 import 'swiper/css/bundle';
 import { FaShare, FaMapMarkerAlt, FaBed, FaBath, FaParking, FaChair } from 'react-icons/fa'
@@ -18,7 +17,8 @@ const Listing = () => {
     const [listing, setListing] = useState(null)
     const [loading, setLoading] = useState(true)
     const [shareLinkCopied, setShareLinkCopied] = useState(false);
-    const [contactLandlord, setContactLandlord] = useState(false)
+    const [contactLandlord, setContactLandlord] = useState(false);
+    const [hover, setHover] = useState(false);
     // SwiperCore.use([Autoplay, Navigation, Pagination])
 
     useEffect(() => {
@@ -36,6 +36,15 @@ const Listing = () => {
     if (loading) {
         return <Spinner />
     }
+
+    const onHover = () => {
+        setHover(true);
+    };
+
+    const onLeave = () => {
+        setHover(false);
+    };
+
     return (
         <main>
             <Swiper slidesPerView={1}
@@ -120,9 +129,15 @@ const Listing = () => {
                             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                         />
                         <Marker position={[listing.enableGeoLocation.lat, listing.enableGeoLocation.lng]}>
-                            <Popup>
-                                A pretty CSS3 popup. <br /> Easily customizable.
+                            <Popup
+                                onMouseOver={onHover}
+                                onMouseOut={onLeave}
+                            >
+                                {listing.address}
                             </Popup>
+                            {hover && (
+                                <p>click to show address</p>
+                            )}
                         </Marker>
                     </MapContainer>
                 </div>
