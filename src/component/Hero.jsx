@@ -49,7 +49,7 @@ const Hero = () => {
                         <div className="relative w-full overflow-hidden h-[300px]"
                             style={{
                                 background: `url(${data.data.imgUrls[0]}) center, no-repeat`,
-                                backgroundSize: 'cover'
+                                backgroundSize: 'cover',
                             }}>
                         </div>
                         <p className="text-[#f1faee] absolute left1 top-3 font-medium max-w-[90%] bg-[#457b9d] shadow-lg opacity-90 p-2 rounded-br-3xl">{data.data.name}</p>
