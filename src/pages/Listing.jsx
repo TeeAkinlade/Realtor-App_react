@@ -78,7 +78,7 @@ const Listing = () => {
                 <p className="fixed top-[30%] sm:top-[25%] right-[5%] font-semibold boder-2 border-gray-400 rounded-md bg-white z-10 p-2 ">Linked copied</p>
             )}
 
-            <div className="flex flex-col md:flex-row max-w-6xl lg:mx-auto m-4 p-4 rounded-lg shadow-lg bg-white lg:space-x-5">
+            <div className="flex flex-col md:flex-row max-w-6xl lg:mx-auto my-4 mx-2 sm:m-4 p-2 sm:p-4 rounded-lg shadow-lg bg-white lg:space-x-5">
                 <div className="w-full">
                     <p className="text-2xl font-bold mb-3 text-blue-900 ">
                         {listing.name} - ${" "} {listing.offer ? listing.discountedPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") : listing.regularPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
