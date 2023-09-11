@@ -64,7 +64,7 @@ const Listing = () => {
                     </SwiperSlide>
                 ))}
             </Swiper>
-            <div className="fixed top-[13%] right-[3%] z-10 bg-white cursor-pointer border-2 border-gray-400 rounded-full w-12 h-12 flex justify-center items-center" onClick={() => {
+            <div className="fixed top-[13%] right-[5%] z-10 bg-white cursor-pointer border-2 border-gray-400 rounded-full w-12 h-12 flex justify-center items-center" onClick={() => {
                 //to copy the window location href
                 navigator.clipboard.writeText(window.location.href)
                 setShareLinkCopied(true)
@@ -86,13 +86,13 @@ const Listing = () => {
                     </p>
                     <p className="flex items-center mt-6 mb-3 font-semibold"><FaMapMarkerAlt className='text-green-700 mr-1' />{listing.address}</p>
                     <div className=" flex justify-start items-center space-x-4 w-[75%]">
-                        <p className="bg-red-800 w-full max-w-[200px] rounded-md p-1 text-white text-center font-semibold shadow-md">{listing.type === "rent" ? "For Rent" : "For Sale"}</p>
+                        <p className="bg-red-800 w-full max-w-[200px] rounded-md p-1 text-white text-center font-semibold shadow-md whitespace-nowrap">{listing.type === "rent" ? "For Rent" : "For Sale"}</p>
                         {listing.offer && (
-                            <p className="w-full max-w-[200px] bg-green-800 rounded-md p-1 text-white font-semibold text-center shadow-md">{`$${+listing.regularPrice - +listing.discountedPrice} discount`.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</p>
+                            <p className="w-full max-w-[200px] bg-green-800 rounded-md py-1 px-2 text-white font-semibold text-center shadow-md whitespace-nowrap">{`$${+listing.regularPrice - +listing.discountedPrice} discount`.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</p>
                         )}
                     </div>
                     <p className=" mt-3 mb-3"><span className="font-semibold">Description - </span> {listing.description}</p>
-                    <ul className="flex items-center space-x-4 lg:space-x-10 text-sm font-semibold mb-6">
+                    <ul className="flex items-center space-x-2 sm:space-x-4 lg:space-x-10 text-sm font-semibold mb-6">
                         <li className="flex items-center whitespace-nowrap">
                             <FaBed className='text-lg mr-1' />
                             {listing.bedrooms > 1 ? `${listing.bedrooms} Beds` : "1 Bed"}
@@ -107,7 +107,7 @@ const Listing = () => {
                         </li>
                         <li className="flex items-center whitespace-nowrap">
                             <FaChair className='text-lg mr-1' />
-                            {listing.furnished ? `Furnished spot` : "Not Furnished"}
+                            {listing.furnished ? `Furnished` : "Not Furnished"}
                         </li>
 
                     </ul>

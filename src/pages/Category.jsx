@@ -4,7 +4,7 @@ import { collection, getDocs, limit, orderBy, query, startAfter, where } from "f
 import { db } from '../firebase'
 import Spinner from '../component/Spinner';
 import ListingItem from '../component/ListingItem';
-import { useParams } from 'react-router';
+import { useParams } from 'react-router-dom';
 
 const Category = () => {
 
@@ -30,6 +30,7 @@ const Category = () => {
                     })
                 })
                 setListings(listings)
+                console.log(listings)
                 setLoading(false)
 
             } catch (error) {
@@ -55,7 +56,7 @@ const Category = () => {
                     data: doc.data(),
                 })
             })
-            // setListings((prevState) =>[...prevState, ...listings])
+            // setListings((prevState) => [...prevState, ...listings])
             setLoading(false)
         } catch (error) {
             // toast.error('could not fetch listing')
@@ -66,7 +67,9 @@ const Category = () => {
     fetchMore()
 
     return <div className='max-w-6xl mx-auto px-3'>
-        <h1 className="text-3xl text-center my-6 font-semibold">{params.categoryName == "rent" ? "Places for rent" : "Places for sale"}</h1>
+        <h1 className="text-3xl text-center my-6 font-semibold">
+            {params.categoryName === "rent" ? "Places for rent" : "Places for sale"}
+        </h1>
         {loading ? (
             <Spinner />
         ) : listings && listings.length > 0 ? (

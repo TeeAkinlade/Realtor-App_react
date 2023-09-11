@@ -72,6 +72,9 @@ const Profile = () => {
                 })
             })
             setListings(listings);
+            listings.map(list => {
+                console.log(list.id)
+            })
             setLoading(false);
         }
         fetchUserListing();

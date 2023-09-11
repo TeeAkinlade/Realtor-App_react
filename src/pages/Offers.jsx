@@ -53,7 +53,7 @@ const Offers = () => {
           data: doc.data(),
         })
       })
-      // setListings((prevState) =>[...prevState, ...listings])
+      // setListings((prevState) => [...prevState, ...listings])
       setLoading(false)
     } catch (error) {
       // toast.error('could not fetch listing')

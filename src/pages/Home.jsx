@@ -6,8 +6,11 @@ import { Link } from 'react-router-dom'
 import ListingItem from '../component/ListingItem'
 
 const Home = () => {
+  const [offerListing, setOfferListing] = useState(null);
+  const [rentListing, setRentListing] = useState(null);
+  const [saleListing, setSaleListing] = useState(null);
+
   // offers
-  const [offerListing, setOfferListing] = useState(null)
   useEffect(() => {
     const offers = async () => {
       try {
@@ -36,7 +39,7 @@ const Home = () => {
     offers()
   }, [])
   // rent
-  const [rentListing, setRentListing] = useState(null)
+
   useEffect(() => {
     const rent = async () => {
       try {
@@ -56,6 +59,10 @@ const Home = () => {
           })
         });
         setRentListing(listings)
+        listings.map((listing) => {
+
+          console.log(listing.id)
+        })
 
       } catch (error) {
         console.log(error)
@@ -64,8 +71,8 @@ const Home = () => {
     }
     rent()
   }, [])
+
   // sale
-  const [saleListing, setSaleListing] = useState(null)
   useEffect(() => {
     const sale = async () => {
       try {
@@ -108,6 +115,7 @@ const Home = () => {
                 {offerListing.map((listing) => (
                   <ListingItem
                     key={listing.id}
+                    id={listing.id}
                     result={listing.data}
                   />
                 ))}
@@ -117,13 +125,14 @@ const Home = () => {
         )}
         {rentListing && rentListing.length > 0 && (
           <div className="m-2 mb-6">
-            <h2 className="px-3 text--2xl font-semibold mt-6">Place for rents</h2>
-            <Link to="/category/rents">
+            <h2 className="px-3 text-2xl font-semibold mt-6">Place for rents</h2>
+            <Link to="/category/rent">
               <p className="text-sm px-3 text-blue-600 hover:text-blue-800 transition duration-150 ease-in-out">Show more rents</p>
               <ul className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
                 {rentListing.map((listing) => (
                   <ListingItem
                     key={listing.id}
+                    id={listing.id}
                     result={listing.data}
                   />
                 ))}
@@ -134,12 +143,13 @@ const Home = () => {
         {saleListing && saleListing.length > 0 && (
           <div className="m-2 mb-6">
             <h2 className="px-3 text--2xl font-semibold mt-6">Place for sales</h2>
-            <Link to="/category/sales">
+            <Link to="/category/sale">
               <p className="text-sm px-3 text-blue-600 hover:text-blue-800 transition duration-150 ease-in-out">Show more sales</p>
               <ul className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
                 {saleListing.map((listing) => (
                   <ListingItem
                     key={listing.id}
+                    id={listing.id}
                     result={listing.data}
                   />
                 ))}
