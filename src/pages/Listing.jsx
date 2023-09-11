@@ -56,9 +56,10 @@ const Listing = () => {
                 autoplay={{ delay: 3000 }}>
                 {listing.imgUrls.map((url, index) => (
                     <SwiperSlide key={index}>
-                        <div className=" relative w-full overflow-hidden h-[300px]" style={{
+                        <div className=" relative w-[100%] overflow-hidden h-[300px] sm:h-[400px]" style={{
                             background: `url(${listing.imgUrls[index]}) center no-repeat`,
-                            backgroundSize: 'cover'
+                            backgroundSize: 'cover',
+                            objectFit: 'scale-down'
                         }}>
                         </div>
                     </SwiperSlide>

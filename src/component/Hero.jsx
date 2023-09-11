@@ -46,10 +46,11 @@ const Hero = () => {
                 autoplay={{ delay: 3000 }}>
                 {listings.map((data, id) => (
                     <SwiperSlide key={id} onClick={() => navigate(`/category/${data.data.type}/${data.id}`)}>
-                        <div className="relative w-full overflow-hidden h-[300px]"
+                        <div className="relative w-[100%] overflow-hidden h-[300px] sm:h-[400px]"
                             style={{
                                 background: `url(${data.data.imgUrls[0]}) center, no-repeat`,
                                 backgroundSize: 'cover',
+                                objectFit: 'contain'
                             }}>
                         </div>
                         <p className="text-[#f1faee] absolute left1 top-3 font-medium max-w-[90%] bg-[#457b9d] shadow-lg opacity-90 p-2 rounded-br-3xl">{data.data.name}</p>
